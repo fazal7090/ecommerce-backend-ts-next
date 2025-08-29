@@ -7,9 +7,9 @@ import Navbar from "@/components/navbar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     storeId: string;
-  };
+  }>;
 }
 
 export default async function DashboardLayout({
@@ -17,6 +17,7 @@ export default async function DashboardLayout({
   params,
 }: DashboardLayoutProps) {
   const { userId } =await auth();
+  const { storeId } = await params;
 
   if (!userId) {
     redirect("/sign-in");
@@ -24,7 +25,7 @@ export default async function DashboardLayout({
 
   const store = await prismadb.store.findFirst({
     where: {
-      id: params.storeId,
+      id: storeId,
       userId,
     },
   });

@@ -11,15 +11,16 @@ import { CreditCardIcon, DollarSign, Package } from "lucide-react";
 // import prismadb from "@/lib/prismadb"; // (currently commented out)
 
 interface DashboardPageProps {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }
 
 const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
+  const { storeId } = await params;
 
-  const totalRevenue = await getTotalRevenue(params.storeId);
-const salesCount = await getSalesCount(params.storeId);
-const stockCount = await getStockCount(params.storeId);
-const graphRevenue = await getGraphRevenue(params.storeId);
+  const totalRevenue = await getTotalRevenue(storeId);
+const salesCount = await getSalesCount(storeId);
+const stockCount = await getStockCount(storeId);
+const graphRevenue = await getGraphRevenue(storeId);
 
 
 

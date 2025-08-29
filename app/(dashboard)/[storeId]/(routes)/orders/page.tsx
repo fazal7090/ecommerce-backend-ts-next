@@ -1,4 +1,3 @@
-
 import { format } from "date-fns"
 import prismadb from "@/lib/prismadb";
 import { BillboardClient } from "./components/client";
@@ -8,11 +7,13 @@ import { formatter } from "@/lib/utils";
 const OrdersPage = async ({
   params,
 }: {
-  params: { storeId: string };
+  params: Promise<{ storeId: string }>;
 }) => {
+  const { storeId } = await params;
+
   const orders = await prismadb.order.findMany({
     where: {
-      storeId: params.storeId,
+      storeId: storeId,
     },
     orderBy: {
       createdAt: 'desc',
