@@ -124,7 +124,7 @@ The application uses a MySQL database with the following main entities:
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/fazal7090/ecommerce-backend-ts-next.git>
    cd ecommerce-backend
    ```
 
